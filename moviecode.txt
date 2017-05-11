@@ -1,0 +1,55 @@
+import pandas as pd
+import numpy as np
+from pandas import Series, DataFrame
+
+
+#upload file
+data = pd.read_csv(r'C:\Users\teddy\Desktop\mlmovie1.csv')
+
+genres = data['genres']
+DataFrame(genres)
+
+# split genres by using '|'
+split = genres.apply(lambda x: Series(x.split('|')))
+
+# show the first genres and combine with original data
+new = data.join(split[0])
+
+#delete the old genres column
+dropcol = new.drop('genres', axis = 1)
+
+#rename the new genres colum to majorgenres
+rename = dropcol.rename(columns = {0:'majorgenres'})
+
+
+#replace language column with numbers
+lg = rename
+lg['language'].replace(['English','French','Hindi','Spanish','Mandarin','Cantonese','German','Japanese','Russian','Korean',
+                        'Arabic','Italian','Portuguese','Aboriginal','Polish','Dari','Dutch','Zulu','Hebrew','Telugu','Tamil',
+                        'Swahili','Icelandic','Maya','Slovenian','Persian','Panjabi','Indonesian','Filipino','None','Swedish','Greek',
+                        'Thai','Chinese','Norwegian','Vietnamese','Aramaic','Hungarian'],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,
+                                                                                          19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,
+                                                                                          34,35,36,37,38], inplace = True)
+
+#replace country column with numbers
+lg['country'].replace(['USA','UK','Canada','France','Germany','Australia','Spain','India','NewZealand',
+                       'HongKong','Ireland','China','Japan','Italy','Mexico','SouthKorea','SouthAfrica',
+                       'Denmark','Belgium','Russia','Switzerland','Netherlands','Thailand','Norway',
+                       'Poland','CzechRepublic','Iceland','Israel','Hungary','Brazil','Greece',
+                       'Romania','Bulgaria','Nigeria','Slovenia','Iran','NewLine','Aruba','Finland',
+                       'Kenya','Bahamas','Georgia','Afghanistan','WestGermany','Egypt','Officialsite',
+                       'SovietUnion','Chile','Colombia','Libya','Philippines','UnitedArabEmirates','Sweden',
+			'Panama','Peru','Cameroon'],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,
+                                                     19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,
+                                                     34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,
+							49,50,51,52,53,54,55,56], inplace = True)
+
+#replace majorgenres column with numbers
+lg['majorgenres'].replace(['Comedy','Action','Drama','Adventure','Crime','Biography','Horror','Documentary',
+				'Fantasy','Animation','Mystery','Thriller','SciFi','Family','Western','Musical',
+				'Romance','FilmNoir','GameShow','Music'],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,
+				17,18,19,20], inplace = True)
+
+#save file to local
+rename.to_csv(r'C:\Users\teddy\Desktop\mlmovienew.csv')
+                        
