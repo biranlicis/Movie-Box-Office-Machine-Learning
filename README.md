@@ -1,1 +1,3 @@
 # Movie-Box-Office-Machine-Learning
+
+We studied global box office of major movies, and analyzed the key attributes to be considered in Oscar nominations. We acquired the dataset of IMDB 5000 from kaggle.com,  the movies and ratings from grouplens, and the Academy Award records. The data set size is around 510MB. We predicted the global box office by using Linear Regression model and Gradient Boosting Tree model. For Oscar nominations, we used Decision Tree and Logistic Regression as classification methods. We ran these models on both Azure ML and Spark ML, then compared them using cross validation to find out which algorithm would produce the most accurate forecast.
